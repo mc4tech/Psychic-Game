@@ -20,7 +20,12 @@
 
 }
 
-#game {
+p {
     font-weight: 30px;
     font-size: 36px;
+}
+
+#guessedLetters {
+    border-width: 15px;
+    border:red;
 }

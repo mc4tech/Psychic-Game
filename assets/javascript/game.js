@@ -6,20 +6,20 @@ $(document).ready(function() {
 	var losses = 0;
 	var guessesLeft = 10;
 	var numGuesses = 0;
-
+	
 	
 	
 	var computerGuess = function() {
 			computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];	
 			console.log("Computer Guess: " + computerGuess);
-		};	
+		};	//end computerGuess function
 
-	computerGuess();
+	computerGuess(); //call computerGuess
 
 	var restart = function(){
 			numGuesses = 0;
 			guessesLeft = 10;
-			// computerGuess();
+			// computerGuess(); //tried calling computerGuess here but it says it's not defined???
 			console.log("Computer Guess: " + computerGuess);
 			console.log("Number of Guesses: " + numGuesses);
 			console.log("Guesses left: " +guessesLeft);
@@ -27,19 +27,13 @@ $(document).ready(function() {
 
 	document.onkeyup = function(event) {
 		
-		// if (userGuess === computerGuess) {
-		// 	var computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];		
-		// 	console.log(computerGuess);
-		// 	userGuess = event.key;
-		// 	console.log(userGuess);	
-		// }	
-		var guessed = [];
+		
 		var userGuess = event.key;
 		console.log("Your Guess: " + userGuess);
 		// for ( var i = 0; guessesLeft > 0; i++) {
-		// 	var userGuess = event.key;
+		// 	var userGuess = event.key;// previous logic I commented out
 		// 	console.log(userGuess);
-
+		var wrongLetters = [];
 			
 
 							
@@ -48,7 +42,9 @@ $(document).ready(function() {
 			console.log("Wins: " + wins);
 			computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 			restart();
-		} else if (guessesLeft > 0) {
+		} else if  ((userGuess!== computerGuess) && (guessesLeft > 0)) {
+			// $("#guessesLetters").prepend("<br><hr>" + wrongLetters);
+			wrongLetters.push(userGuess);
 			numGuesses += 1;
 			guessesLeft -= 1;
 			// alert("Try Again");
@@ -60,12 +56,15 @@ $(document).ready(function() {
 			restart();
 		}
 
+
 		 var html = "<p>Press any key to start playing!</p>" +
           "<p>Wins: " + wins + "</p>" +
           "<p>Losses: " + losses + "</p>" +
           "<p>Number of Guesses: " + numGuesses + "</p>" +
-          "<p>Guesses left: " + guessesLeft + "</p>";
+          "<p>Guesses left: " + guessesLeft + "</p>";          
 
+
+		 document.getElementById('guessedLetters').innerHTML = wrongLetters;
           // Injecting the HTML we just created into our div and updating the game information on our page.
           document.querySelector("#game").innerHTML = html;
 	};
