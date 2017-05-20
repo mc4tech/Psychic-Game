@@ -9,22 +9,27 @@ $(document).ready(function() {
 	
 	
 	
-	var computerGuess = function() {
+	 computerGuess = function() {
 			computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];	
 			console.log("Computer Guess: " + computerGuess);
-		};	//end computerGuess function
 
-	computerGuess(); //call computerGuess
-
-	var restart = function(){
+			
+			restart = function(){
 			numGuesses = 0;
 			guessesLeft = 10;
-			// computerGuess(); //tried calling computerGuess here but it says it's not defined???
+			computerGuess(); //tried calling computerGuess here but it says it's not defined???
 			console.log("Computer Guess: " + computerGuess);
 			console.log("Number of Guesses: " + numGuesses);
 			console.log("Guesses left: " +guessesLeft);
-		};
+			};
+		};	//end computerGuess function
 
+
+
+	computerGuess(); //call computerGuess
+	console.log(computerGuess);
+
+	
 	document.onkeyup = function(event) {
 		
 		
@@ -44,9 +49,12 @@ $(document).ready(function() {
 			restart();
 		} else if  ((userGuess!== computerGuess) && (guessesLeft > 0)) {
 			// $("#guessesLetters").prepend("<br><hr>" + wrongLetters);
-			wrongLetters.push(userGuess);
-			numGuesses += 1;
-			guessesLeft -= 1;
+			// for ( var i = 0; guessesLeft > 0; i++){
+			// 	wrongLetters.push(userGuess);
+			// 	console.log(wrongLetters);
+			// 	numGuesses += 1;
+			// 	guessesLeft -= 1;
+			// }
 			// alert("Try Again");
 			console.log("Number of Guesses: " + numGuesses);
 			console.log("Guesses left: " +guessesLeft);
@@ -54,6 +62,7 @@ $(document).ready(function() {
 			computerGuess = alphabet[Math.floor(Math.random() * alphabet.length)];
 			losses++;
 			restart();
+			// computerGuess();
 		}
 
 
